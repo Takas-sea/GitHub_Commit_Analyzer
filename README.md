@@ -1,1 +1,1 @@
-# progress_management_app
+# GitHub Commit Analyzer
