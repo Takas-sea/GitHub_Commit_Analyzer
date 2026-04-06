@@ -21,7 +21,14 @@ To understand the continuity of development and activity trends.
 
 ---
 
-### Backend (Java API)
+### Backend (Go)
+
+#### Technology Stack
+- Go 1.21+
+- Web framework: Gin
+- HTTP Client: `net/http` or `github.com/go-resty/resty/v2`
+- JSON handling: `encoding/json`
+- Concurrency: goroutines + channels (optional, for faster API calls)
 
 #### Endpoint
 
