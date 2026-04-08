@@ -7,7 +7,7 @@ bin/
 *.dll
 *.so
 *.dylib
-*.test              
+*.test           
 *.out
 
 # Goのキャッシュ
