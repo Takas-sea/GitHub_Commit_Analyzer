@@ -38,21 +38,40 @@ func fetchCommits(owner, repo string) ([]Commit, error) {
     return data, nil
 }
 
+func aggregateByDate(commits []Commit) map[string]int {
+    result := make(map[string]int)
+
+    for _, c := range commits {
+        date := c.Commit.Author.Date[:10] // YYYY-MM-DD
+        result[date]++
+    }
+
+    return result
+}
+
 func main() {
     r := gin.Default()
 
     r.GET("/users/:username/stats", func(c *gin.Context) {
         username := c.Param("username")
+        repo := c.Query("repo") // ?repo=xxx
 
-        commits, err := fetchCommits(username, "your-repo-name")
+if repo == "" {
+    c.JSON(400, gin.H{"error": "repo is required"})
+    return
+}
+        commits, err := fetchCommits(username, repo)
         if err != nil {
             c.JSON(500, gin.H{"error": err.Error()})
             return
         }
 
-        c.JSON(200, gin.H{
-            "raw": commits,
-        })
+       daily := aggregateByDate(commits)
+
+c.JSON(200, gin.H{
+    "raw":   commits,
+    "daily": daily,
+})
     })
 
     r.Run(":8080")
