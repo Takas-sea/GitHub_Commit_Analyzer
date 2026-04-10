@@ -38,6 +38,27 @@ func fetchCommits(owner, repo string) ([]Commit, error) {
     return data, nil
 }
 
+func calculateScore(daily map[string]int) (int, int, int) {
+    total := 0
+    longest := 0
+    current := 0
+
+    for _, count := range daily {
+        total += count
+        if count > 0 {
+            current++
+            if current > longest {
+                longest = current
+            }
+        } else {
+            current = 0
+        }
+    }
+
+    score := (longest * 2) + total
+    return total, longest, score
+}
+
 func aggregateByDate(commits []Commit) map[string]int {
     result := make(map[string]int)
 
