@@ -70,6 +70,16 @@ func aggregateByDate(commits []Commit) map[string]int {
     return result
 }
 
+func classify(msg string) string {
+    if strings.HasPrefix(msg, "feat") {
+        return "feature"
+    }
+    if strings.HasPrefix(msg, "fix") {
+        return "bugfix"
+    }
+    return "other"
+}
+
 func main() {
     r := gin.Default()
 
