@@ -11,6 +11,14 @@ To understand the continuity of development and activity trends.
 * Graph display
 * Scoring function
 
+## Architecture
+
+```mermaid
+graph TD
+    A["Frontend (Next.js)"] --> |HTTP Request| B["Backend (Go + Gin)"]
+    B --> C["GitHub API"]
+```
+
 ## MVP Specification
 
 ### Scope
