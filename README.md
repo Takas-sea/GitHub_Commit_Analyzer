@@ -69,6 +69,28 @@ GET /users/{username}/stats
 
   * total commits
   * score
+---
+
+## API
+
+### GET /users/{username}/stats
+
+#### Response
+{
+  "total_commits": number,
+  "longest_streak": number,
+  "score": number,
+  "daily_commits": [
+    { "date": "YYYY-MM-DD", "count": number }
+  ]
+}
+
+---
+
+#### Data Fetch Strategy
+- Fetch all public repositories of the user
+- Retrieve commits per repository within the last 30 days
+- Aggregate results on backend
 
 ---
 
