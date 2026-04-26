@@ -71,7 +71,7 @@ GET /users/{username}/stats
   * score
 ---
 
-## API
+### API
 
 ### GET /users/{username}/stats
 
@@ -87,7 +87,7 @@ GET /users/{username}/stats
 
 ---
 
-#### Data Fetch Strategy
+### Data Fetch Strategy
 - Fetch all public repositories of the user
 - Retrieve commits per repository within the last 30 days
 - Aggregate results on backend
