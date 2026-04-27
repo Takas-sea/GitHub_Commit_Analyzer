@@ -10,13 +10,11 @@ func main() {
 	r := gin.Default()
 
 	r.GET("/users/:username/stats", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"total_commits":  10,
-			"longest_streak": 3,
-			"score":          16,
-			"daily_commits":  []interface{}{},
-		})
-	})
+    username := c.Param("username")
 
+    c.JSON(http.StatusOK, gin.H{
+    "username": username,
+	})
+	})
 	r.Run(":8080")
 }
