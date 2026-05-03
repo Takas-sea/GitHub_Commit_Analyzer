@@ -70,26 +70,24 @@ func main() {
 		username := c.Param("username")
 
 		repos, err := fetchRepos(username)
-		if err != nil {
-			c.JSON(500, gin.H{"error": "failed to fetch repos"})
-			return
-		}
+if err != nil {
+	c.JSON(500, gin.H{"error": "failed to fetch repos"})
+	return
+}
 
-		if len(repos) == 0 {
-			c.JSON(200, gin.H{"message": "no repos"})
-			return
-		}
+var allCommits []Commit
 
-		commits, err := fetchCommits(username, repos[0].Name)
-		if err != nil {
-			c.JSON(500, gin.H{"error": "failed to fetch commits"})
-			return
-		}
+for _, repo := range repos {
+	commits, err := fetchCommits(username, repo.Name)
+	if err != nil {
+		continue
+	}
+	allCommits = append(allCommits, commits...)
+}
 
-		c.JSON(200, gin.H{
-			"repo":    repos[0].Name,
-			"commits": commits,
-		})
+c.JSON(200, gin.H{
+	"total_commits": len(allCommits),
+})
 	})
 
 	r.Run(":8080")
